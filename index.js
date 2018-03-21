@@ -1,5 +1,7 @@
 const config = require('./config.json');
 const commander = require('./commands.js');
+const Job = require('./models/job.js').Job;
+const jobsc = require('./jobscheduler.js').jobscheduler;
 
 const commands = commander.commands;
 
@@ -9,6 +11,8 @@ const client = new Discord.Client();
 client.login(config.token);
 client.on('ready', () => {
 	console.log(`Connected as ${client.user.username}!`);
+
+	jobsc();
 });
 
 client.on('message', message => {

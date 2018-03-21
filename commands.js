@@ -79,6 +79,7 @@ let commands = [
 
 			function playSong()
 			{
+				if (upNext.playing) return message.channel.sned('The music bot is alreayd playing!');
 				if (dispatcher) dispatcher = null;
 				if (upNext.songs.length < 1) return message.channel.send('There are no more songs in the queue!');
 				streamReady(yt(upNext.songs[0].url, { filter: 'audioonly' }));
