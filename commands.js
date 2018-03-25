@@ -105,6 +105,12 @@ let commands = [
 			function ended()
 			{
 				console.log('ending');
+				if (upNext.replay)
+				{
+					playSong();
+					return;
+				}
+
 				if (upNext.songs.length > 0)
 				{
 					upNext.songs.shift();
