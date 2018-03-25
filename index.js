@@ -1,7 +1,7 @@
 const config = require('./config.json');
 const commander = require('./commands.js');
 const Job = require('./models/job.js').Job;
-const jobsc = require('./jobscheduler.js').jobscheduler;
+const jobsc = require('./jobscheduler.js');
 
 const commands = commander.commands;
 
@@ -12,7 +12,7 @@ client.login(config.token);
 client.on('ready', () => {
 	console.log(`Connected as ${client.user.username}!`);
 
-	jobsc();
+	jobsc.jobscheduler(client);
 });
 
 client.on('message', message => {

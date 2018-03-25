@@ -1,6 +1,6 @@
-var clearchat = require('./jobs/clearchat.js').clearchat;
+var clearchat = require('./jobs/clearchat.js');
 
-exports.jobscheduler = function ()
+exports.jobscheduler = function (client)
 {
-    setInterval(clearchat, 3*1000);
+    setInterval(function() { clearchat.clearchat(client); } , 3*1000);
 }
