@@ -43,7 +43,7 @@ client.on('presenceUpdate', (oldMember, newMember) =>
 });
 
 function handle_command(message) {
-	for (var i = 0; i < commands.length; i++){
+	for (let i = 0; i < commands.length; i++){
 		if (message.content.substr(1).toLowerCase().startsWith(commands[i].command.toLowerCase())){
 			if (commands[i].command == 'help' || commands[i].command == 'queue' || commands[i].command == 'add' || commands[i].comamnd == 'queue' || commands[i].command == 'play')
 			{

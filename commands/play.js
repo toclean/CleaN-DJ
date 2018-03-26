@@ -1,18 +1,44 @@
-exports.play = function play(client, voiceConnection, dispatcher, queue, message) {
-    function playSong()
-    {
-        if (upNext.playing) return 
-        if (upNext.songs.length < 1) return message.channel.send('There are no more songs in the queue!');
-        message.channel.send(`Now playing: ${upNext.songs[0].title} requested by ${upNext.songs[0].requester}`);
-        var stream = yt(upNext.songs[0].url, { filter: 'audioonly' });
-        dispatcher = voiceConnection.playStream(stream, { seek: 0, volume: 1 });
+let yt = require('ytdl-core');
 
-        dispatcher.on('end', () => {
-            if (upNext.songs.length > 0)
-            {
-                upNext.songs.shift();
-                playSong();
-            }
+exports.play = function play(client, voiceConnection, dispatcher, upNext, message) {
+    if (upNext.playing) return message.channel.sned('The music bot is alreayd playing!');
+    if (dispatcher) dispatcher = null;
+    if (upNext.songs.length < 1) return message.channel.send('There are no more songs in the queue!');
+    streamReady(yt(upNext.songs[0].url, { filter: 'audioonly' }));
+
+    function streamReady(stream)
+    {
+        streaming(voiceConnection.playStream(stream, { seek: 0, volume: 1 }));
+    }
+
+    function streaming(dis)
+    {
+        dispatcher = dis;
+        dispatcher.on('error', error);
+        dispatcher.on('end', ended);
+        dispatcher.on('start', () => {
+            message.channel.send(`Now playing: ${upNext.songs[0].title} requested by ${upNext.songs[0].requester}`);
         });
+    }
+
+    function ended()
+    {
+        console.log('ending');
+        if (upNext.replay)
+        {
+            playSong();
+            return;
+        }
+
+        if (upNext.songs.length > 0)
+        {
+            upNext.songs.shift();
+            playSong();
+        }
+    }
+
+    function error(err)
+    {
+        console.error;
     }
 }
