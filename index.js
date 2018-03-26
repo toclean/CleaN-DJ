@@ -8,7 +8,7 @@ const commands = commander.commands;
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-let happened = [];
+let POSTED_ABOUT_LIVESTREAM;
 
 client.login(config.token);
 client.on('ready', () => {
@@ -21,7 +21,7 @@ client.on('message', message => {
 	if (message.author.bot) return;
 	if (!message.content.startsWith('.')) return;
 	handle_command(message);
-});
+});	
 
 client.on('presenceUpdate', (oldMember, newMember) => 
 {
@@ -29,16 +29,15 @@ client.on('presenceUpdate', (oldMember, newMember) =>
 	console.log(oldMember.presence.game);
 	console.log(newMember.presence.game);
 
-	if (happened.includes(oldMember.user.id))
+	if (POSTED_ABOUT_LIVESTREAM)
 	{
-		let index = happened.indexOf(oldMember.user.id);
-		happened.splice(1, index);
+		POSTED_ABOUT_LIVESTREAM = false;
 		return;
 	}
 
-	if ((oldMember.presence.game == null || !oldMember.presence.game.streaming) && newMember.presence.game.streaming)
+	if ((oldMember.presence.game == null || !oldMember.presence.game.streaming) && (newMember.presence.game != null && newMember.presence.game.streaming))
 	{
-		happened.push(oldMember.user.id);
+		POSTED_ABOUT_LIVESTREAM = true;
 		return channel.send(`${newMember.displayName} has started streaming ${newMember.presence.game.url}`);
 	}
 });
