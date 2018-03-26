@@ -8,6 +8,8 @@ const commands = commander.commands;
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+let happened = [];
+
 client.login(config.token);
 client.on('ready', () => {
 	console.log(`Connected as ${client.user.username}!`);
@@ -24,15 +26,20 @@ client.on('message', message => {
 client.on('presenceUpdate', (oldMember, newMember) => 
 {
 	let channel = client.channels.filter(channel => channel.type == 'text').first();
+	console.log(oldMember.presence.game);
+	console.log(newMember.presence.game);
 
-	if (newMember.presence.game == null) return;
-
-	if (newMember.presence.game.streaming)
+	if (happened.includes(oldMember.user.id))
 	{
-		if (!oldMember.presence.game.streaming)
-		{
-			return channel.send(`${newMember.displayName} has started streaming ${newMember.presence.game.url}`);
-		}
+		let index = happened.indexOf(oldMember.user.id);
+		happened.splice(1, index);
+		return;
+	}
+
+	if ((oldMember.presence.game == null || !oldMember.presence.game.streaming) && newMember.presence.game.streaming)
+	{
+		happened.push(oldMember.user.id);
+		return channel.send(`${newMember.displayName} has started streaming ${newMember.presence.game.url}`);
 	}
 });
 
