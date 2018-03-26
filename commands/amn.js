@@ -5,6 +5,6 @@ exports.anm = async function (message)
     var guild = message.guild;
     guild.members.forEach(function (member)
     {
-        await member.send(msg);
+        member.send(msg);
     });
 }
