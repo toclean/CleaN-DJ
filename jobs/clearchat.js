@@ -1,6 +1,5 @@
 exports.clearchat = function (client)
 {
-	
 	// Gets every text channel in the server
 	var textChannels = client.channels.filter(channel => channel.type == 'text');
 

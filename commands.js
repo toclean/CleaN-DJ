@@ -10,6 +10,7 @@ var stop = require('./commands/stop.js').stop;
 var leave = require('./commands/leave.js').leave;
 var cq = require('./commands/cq.js').cq;
 var queue = require('./commands/queue.js').queue;
+var anm = require('./commands/amn.js');
 
 var yt = require('ytdl-core');
 
@@ -208,6 +209,13 @@ let commands = [
 			if (dispatcher.paused)
 				dispatcher.resume();
 		}
+	},
+	{
+		command: "anm",
+		description: "Sends a message to all users in the server (online/offline)",
+		arguments: [],
+		execute: function (message) {
+			anm.anm(message);		}
 	}
 ]
 
