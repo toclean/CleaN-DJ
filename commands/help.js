@@ -1,8 +1,8 @@
-var embedMaker = require('../tools/embedMaker.js').embedMaker;
+let embedMaker = require('../tools/embedMaker.js').embedMaker;
 
 exports.help = function help (client, message, commands) {
 	let info = [];
-	for (var i = 0; i < commands.length; i++) {
+	for (let i = 0; i < commands.length; i++) {
 			info[i] = { name: `${commands[i].command} ${commands[i].arguments}`, value: commands[i].description};
 	}
 

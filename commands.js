@@ -1,18 +1,18 @@
 
-var ping = require('./commands/ping.js').ping;
-var help = require('./commands/help.js').help;
-var add = require('./commands/add.js').add;
-var play = require('./commands/play.js').play;
-var join = require('./commands/join.js').join;
-var skip = require('./commands/skip.js').skip;
-var clear = require('./commands/clear.js').clear;
-var stop = require('./commands/stop.js').stop;
-var leave = require('./commands/leave.js').leave;
-var cq = require('./commands/cq.js').cq;
-var queue = require('./commands/queue.js').queue;
-var anm = require('./commands/amn.js');
+let ping = require('./commands/ping.js').ping;
+let help = require('./commands/help.js').help;
+let add = require('./commands/add.js').add;
+let play = require('./commands/play.js').play;
+let join = require('./commands/join.js').join;
+let skip = require('./commands/skip.js').skip;
+let clear = require('./commands/clear.js').clear;
+let stop = require('./commands/stop.js').stop;
+let leave = require('./commands/leave.js').leave;
+let cq = require('./commands/cq.js').cq;
+let queue = require('./commands/queue.js').queue;
+let anm = require('./commands/amn.js');
 
-var yt = require('ytdl-core');
+let yt = require('ytdl-core');
 
 let embedMaker = require('./tools/embedMaker.js').embedMaker;
 
@@ -50,7 +50,7 @@ let commands = [
 		description: "Connects to the voice channel",
 		arguments: [],
 		execute: async function (message) {
-			var connectionInfo = await join(message, voiceConnection, voiceChannel);
+			let connectionInfo = await join(message, voiceConnection, voiceChannel);
 			voiceChannel = await connectionInfo[0];
 			voiceConnection = await connectionInfo[1];
 		}

@@ -1,4 +1,4 @@
-var clearchat = require('./jobs/clearchat.js');
+let clearchat = require('./jobs/clearchat.js');
 
 exports.jobscheduler = function (client)
 {

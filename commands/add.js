@@ -1,6 +1,6 @@
-var embedMaker = require('../tools/embedMaker.js').embedMaker;
+let embedMaker = require('../tools/embedMaker.js').embedMaker;
 
-var ytsearch = require('youtube-search');
+let ytsearch = require('youtube-search');
 
 let search, choices;
 
@@ -12,7 +12,7 @@ exports.add = function add(client, queue, message, opts) {
     if (parseInt(search) && parseInt(search) <= 5 && parseInt(search) > 0){
         if (!choices || choices.length < 1) return;
         
-        var choice = choices[parseInt(search)-1];
+        let choice = choices[parseInt(search)-1];
 
         queue.songs.push({url: choice.link, title: choice.title, requester: message.author});
         songAdded(message, queue);
@@ -25,7 +25,7 @@ exports.add = function add(client, queue, message, opts) {
             new Promise((resolve, reject) => {
                 resolve(results);
 
-                for (var i = 0; i < 5; i++){
+                for (let i = 0; i < 5; i++){
                     options.push({name: `${i + 1}. ${results[i].title}`, value: `[LINK](${results[i].link})`});
                 }
             });
@@ -36,7 +36,7 @@ exports.add = function add(client, queue, message, opts) {
         });
     }else if (search.includes('http'))
     {
-        var id = search.split('=')[1];
+        let id = search.split('=')[1];
         ytsearch(id, opts, function(error, results) {
             if (results.length > 0)
             {
