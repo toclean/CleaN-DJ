@@ -1,23 +1,27 @@
 const config = require('./config.json');
 const commander = require('./commands.js');
-const Job = require('./models/job.js').Job;
 const jobsc = require('./jobscheduler.js');
+const Job = require('./models/job.js').Job;
 
 const commands = commander.commands;
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+// Temporary fix to handle double firing presenceUpdate event
 let POSTED_ABOUT_LIVESTREAM;
 
 client.login(config.token);
-client.on('ready', () => {
+
+client.on('ready', () => 
+{
 	console.log(`Connected as ${client.user.username}!`);
 	
 	jobsc.jobscheduler(client);
 });
 
-client.on('message', message => {
+client.on('message', message => 
+{
 	if (message.author.bot) return;
 	if (!message.content.startsWith('.')) return;
 	handle_command(message);

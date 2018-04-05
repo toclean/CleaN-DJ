@@ -5,6 +5,7 @@ let ytsearch = require('youtube-search');
 let search, choices;
 
 exports.add = function add(client, queue, message, opts) {
+    
     if (message.content.includes('http'))
     {
         search = message.content.replace(".add ", "");
@@ -29,9 +30,10 @@ exports.add = function add(client, queue, message, opts) {
             let options = [];
 
             new Promise((resolve, reject) => {
+                if (error) reject(results);
                 resolve(results);
 
-                for (let i = 0; i < 5; i++){
+                for (var i = 0; i < opts.maxResults; i++){
                     options.push({name: `${i + 1}. ${results[i].title}`, value: `[LINK](${results[i].link})`});
                 }
             });

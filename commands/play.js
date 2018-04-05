@@ -1,9 +1,11 @@
 let yt = require('ytdl-core');
 
 exports.play = function play(client, voiceConnection, dispatcher, upNext, message) {
+
     if (upNext.playing) return message.channel.sned('The music bot is alreayd playing!');
-    if (dispatcher) dispatcher = null;
     if (upNext.songs.length < 1) return message.channel.send('There are no more songs in the queue!');
+    if (dispatcher) dispatcher = null;
+
     streamReady(yt(upNext.songs[0].url, { filter: 'audioonly' }));
 
     function streamReady(stream)
@@ -33,7 +35,7 @@ exports.play = function play(client, voiceConnection, dispatcher, upNext, messag
         if (upNext.songs.length > 0)
         {
             upNext.songs.shift();
-            playSong();
+            play(client, voiceConnection, dispatcher, upNext, message);
         }
     }
 

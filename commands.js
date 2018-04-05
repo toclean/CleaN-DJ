@@ -141,7 +141,8 @@ let commands = [
 		execute: function (message) {
 			if (dispatcher)
 			{
-				voiceConnection.leave();
+				voiceConnection.disconnect();
+				voiceConnection = null;
 				dispatcher = null;
 			}
 		}
