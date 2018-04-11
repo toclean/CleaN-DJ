@@ -1,5 +1,4 @@
-exports.clearchat = function (client)
-{
+exports.clearchat = function (client) {
 	// Gets every text channel in the server
 	var textChannels = client.channels.filter(channel => channel.type == 'text');
 
@@ -11,8 +10,7 @@ exports.clearchat = function (client)
 	console.log(`[${utcDate}] - [JOB:CLEAR-ALL-CHATS]: RUNNING`);
 
 	textChannels.forEach(
-		async function(channel)
-		{
+		async function (channel) {
 			await channel.delete();
 			await guild.createChannel(channel.name, 'text');
 		}

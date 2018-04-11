@@ -1,4 +1,3 @@
-
 let ping = require('./commands/ping.js').ping;
 let help = require('./commands/help.js').help;
 let add = require('./commands/add.js').add;
@@ -20,16 +19,19 @@ const config = require('./config.json');
 
 let voiceConnection, voiceChannel, dispatcher;
 
-let upNext = {playing: false, replay: false, songs: []};
+let upNext = {
+	playing: false,
+	replay: false,
+	songs: []
+};
 
 let opts = {
 	maxResults: 5,
 	key: config.youtube,
 	type: "video"
-  };
+};
 
-let commands = [
-	{
+let commands = [{
 		command: "help",
 		description: "Shows this help message",
 		arguments: [],
@@ -69,8 +71,7 @@ let commands = [
 		arguments: [],
 		execute: async function (client, message) {
 			let connectionInfo;
-			if (!voiceConnection)
-			{
+			if (!voiceConnection) {
 				connectionInfo = await join(message, voiceConnection, voiceChannel);
 				voiceChannel = await connectionInfo[0];
 				voiceConnection = await connectionInfo[1];
@@ -82,18 +83,20 @@ let commands = [
 
 			playSong();
 
-			function playSong()
-			{
-				streamReady(yt(upNext.songs[0].url, { filter: 'audioonly' }));
+			function playSong() {
+				streamReady(yt(upNext.songs[0].url, {
+					filter: 'audioonly'
+				}));
 			}
 
-			function streamReady(stream)
-			{
-				streaming(voiceConnection.playStream(stream, { seek: 0, volume: 1 }));
+			function streamReady(stream) {
+				streaming(voiceConnection.playStream(stream, {
+					seek: 0,
+					volume: 1
+				}));
 			}
 
-			function streaming(dis)
-			{
+			function streaming(dis) {
 				dispatcher = dis;
 				dispatcher.on('error', error);
 				dispatcher.on('end', ended);
@@ -102,24 +105,20 @@ let commands = [
 				});
 			}
 
-			function ended()
-			{
+			function ended() {
 				console.log('ending');
-				if (upNext.replay)
-				{
+				if (upNext.replay) {
 					playSong();
 					return;
 				}
 
-				if (upNext.songs.length > 0)
-				{
+				if (upNext.songs.length > 0) {
 					upNext.songs.shift();
 					playSong();
 				}
 			}
 
-			function error(err)
-			{
+			function error(err) {
 				console.error;
 			}
 		}
@@ -161,11 +160,10 @@ let commands = [
 		description: "Replays the current song",
 		arguments: [],
 		execute: function (message) {
-			if (upNext.replay)
-			{
+			if (upNext.replay) {
 				message.channel.send('Replay is off!');
 				upNext.replay = false;
-			}else{
+			} else {
 				message.channel.send('Replay is on!');
 				upNext.replay = true;
 			}
@@ -184,8 +182,7 @@ let commands = [
 		description: "Stops playback and empties queue",
 		arguments: [],
 		execute: function (message) {
-			if (dispatcher)
-			{
+			if (dispatcher) {
 				voiceConnection.disconnect();
 				voiceConnection = null;
 				dispatcher = null;
@@ -215,7 +212,8 @@ let commands = [
 		description: "Sends a message to all users in the server (online/offline)",
 		arguments: [],
 		execute: function (message) {
-			anm.anm(message);		}
+			anm.anm(message);
+		}
 	}
 ]
 

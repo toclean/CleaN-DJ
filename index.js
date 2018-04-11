@@ -13,46 +13,40 @@ let POSTED_ABOUT_LIVESTREAM;
 
 client.login(config.token);
 
-client.on('ready', () => 
-{
+client.on('ready', () => {
 	console.log(`Connected as ${client.user.username}!`);
-	
+
 	jobsc.jobscheduler(client);
 });
 
-client.on('message', message => 
-{
+client.on('message', message => {
 	if (message.author.bot) return;
 	if (!message.content.startsWith('.')) return;
 	handle_command(message);
-});	
+});
 
-client.on('presenceUpdate', (oldMember, newMember) => 
-{
+client.on('presenceUpdate', (oldMember, newMember) => {
 	let channel = client.channels.filter(channel => channel.type == 'text').first();
 	console.log(oldMember.presence.game);
 	console.log(newMember.presence.game);
 
-	if (POSTED_ABOUT_LIVESTREAM)
-	{
+	if (POSTED_ABOUT_LIVESTREAM) {
 		POSTED_ABOUT_LIVESTREAM = false;
 		return;
 	}
 
-	if ((oldMember.presence.game == null || !oldMember.presence.game.streaming) && (newMember.presence.game != null && newMember.presence.game.streaming))
-	{
+	if ((oldMember.presence.game == null || !oldMember.presence.game.streaming) && (newMember.presence.game != null && newMember.presence.game.streaming)) {
 		POSTED_ABOUT_LIVESTREAM = true;
 		return channel.send(`${newMember.displayName} has started streaming ${newMember.presence.game.url}`);
 	}
 });
 
 function handle_command(message) {
-	for (let i = 0; i < commands.length; i++){
-		if (message.content.substr(1).toLowerCase().startsWith(commands[i].command.toLowerCase())){
-			if (commands[i].command == 'help' || commands[i].command == 'queue' || commands[i].command == 'add' || commands[i].comamnd == 'queue' || commands[i].command == 'play')
-			{
+	for (let i = 0; i < commands.length; i++) {
+		if (message.content.substr(1).toLowerCase().startsWith(commands[i].command.toLowerCase())) {
+			if (commands[i].command == 'help' || commands[i].command == 'queue' || commands[i].command == 'add' || commands[i].comamnd == 'queue' || commands[i].command == 'play') {
 				commands[i].execute(client, message);
-			}else{
+			} else {
 				commands[i].execute(message);
 			}
 		}

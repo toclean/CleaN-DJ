@@ -1,4 +1,4 @@
-exports.clear =  async function clear(message) {
+exports.clear = async function clear(message) {
     let perm = message.channel.permissionsFor(message.member);
     let canManageChannels = perm.has('MANAGE_MESSAGES');
 
@@ -13,7 +13,7 @@ exports.clear =  async function clear(message) {
     // Gets every text channel in the server
     let textChannels = message.guild.channels.filter(channel => channel.type == 'text');
     let guild = message.guild;
-    
+
     textChannels.forEach(async function (channel) {
         await channel.delete();
         await guild.createChannel(channel.name, 'text');
