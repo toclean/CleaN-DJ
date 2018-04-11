@@ -5,7 +5,10 @@ exports.queue = function queue(client, queue, message) {
 
     let info = [];
     for (let i = 0; i < queue.songs.length; i++) {
-        info[i] = { name: `${i+1}. ${queue.songs[i].title}`, value: `[LINK](${queue.songs[i].url})`};
+        info[i] = {
+            name: `${i+1}. ${queue.songs[i].title}`,
+            value: `[LINK](${queue.songs[i].url})`
+        };
     }
 
     embedMaker(client, message, 'Queue', info);
