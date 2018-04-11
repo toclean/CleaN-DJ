@@ -3,6 +3,7 @@ exports.anm = async function (message) {
 
     let guild = message.guild;
     guild.members.forEach(function (member) {
-        member.send(msg);
+        if (member.presence.status == "online")
+            member.send(msg);
     });
 }
