@@ -1,6 +1,6 @@
-let embedMaker = require('../tools/embedMaker.js').embedMaker;
+var embedMaker = require('../tools/embedMaker.ts').embedMaker;
 
-exports.help = function help(client, message, commands) {
+exports.modules = function help (client, message, commands) {
 	let info = [];
 	for (let i = 0; i < commands.length; i++) {
 		info[i] = {

@@ -1,14 +1,13 @@
-let embedMaker = require('../tools/embedMaker.js').embedMaker;
+var embedMaker = require('../tools/embedMaker.ts').embedMaker;
 
 let ytsearch = require('youtube-search');
 
 let search, choices;
 
-exports.add = function add(client, queue, message, opts) {
-
-    if (message.content.includes('http')) {
-        search = message.content.replace(".add ", "");
-    } else {
+exports.modules = function add(client, queue, message, opts) {
+    if (message.content.includes('http'))
+        search = message.content.replace(".add ", "")
+    else
         search = message.content.split('.')[1].replace("add ", "");
     }
 
