@@ -1,11 +1,4 @@
-<<<<<<< HEAD:index.js
-const config = require('./config.json');
-const commander = require('./commands.js');
-const jobsc = require('./jobscheduler.js');
-const Job = require('./models/job.js').Job;
-=======
 const commands = require('./commands.ts');
->>>>>>> Converted code from javascript to typescript:index.ts
 
 const config = require('./config.json');
 
@@ -19,8 +12,6 @@ client.login(config.token);
 
 client.on('ready', () => {
 	console.log(`Connected as ${client.user.username}!`);
-
-	jobsc.jobscheduler(client);
 });
 
 client.on('message', message => {
@@ -46,14 +37,6 @@ client.on('presenceUpdate', (oldMember, newMember) => {
 });
 
 function handle_command(message) {
-<<<<<<< HEAD:index.js
-	for (let i = 0; i < commands.length; i++) {
-		if (message.content.substr(1).toLowerCase().startsWith(commands[i].command.toLowerCase())) {
-			if (commands[i].command == 'help' || commands[i].command == 'queue' || commands[i].command == 'add' || commands[i].comamnd == 'queue' || commands[i].command == 'play') {
-				commands[i].execute(client, message);
-			} else {
-				commands[i].execute(message);
-=======
 	for (var i = 0; i < commands.length; i++){
 		if (message.content.substr(1).toLowerCase().startsWith(commands[i].command.toLowerCase())){
 			if (commands[i].command == 'help' || commands[i].command == 'queue' || commands[i].command == 'add' || commands[i].command == 'queue' || commands[i].command == 'play')
@@ -61,7 +44,6 @@ function handle_command(message) {
 				commands[i].execute(client, message);
 			}else{
 				commands[i].execute(client, message);
->>>>>>> Converted code from javascript to typescript:index.ts
 			}
 		}
 	}

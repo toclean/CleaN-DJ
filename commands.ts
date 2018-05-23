@@ -1,5 +1,5 @@
 let add = require('./commands/add.ts');
-let anm = require('./commands/amn.ts');
+let anm = require('./commands/anm.ts');
 let clear = require('./commands/clear.ts');
 let cq = require('./commands/cq.ts');
 let help = require('./commands/help.ts');

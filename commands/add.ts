@@ -9,7 +9,6 @@ exports.modules = function add(client, queue, message, opts) {
         search = message.content.replace(".add ", "")
     else
         search = message.content.split('.')[1].replace("add ", "");
-    }
 
     if (parseInt(search) && parseInt(search) <= 5 && parseInt(search) > 0) {
         if (!choices || choices.length < 1) return;
