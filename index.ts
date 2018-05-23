@@ -1,4 +1,4 @@
-const commands = require('./commands.ts');
+const commands = require('./commands.ts').commands;
 
 const config = require('./config.json');
 
@@ -43,7 +43,7 @@ function handle_command(message) {
 			{
 				commands[i].execute(client, message);
 			}else{
-				commands[i].execute(client, message);
+				commands[i].execute(message);
 			}
 		}
 	}

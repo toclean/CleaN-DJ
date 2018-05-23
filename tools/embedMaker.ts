@@ -1,4 +1,4 @@
-exports.modules = function embedMaker(client, message, title, fields) {
+exports.embedMaker = function embedMaker(client, message, title, fields) {
 
     message.channel.send({
         embed: {

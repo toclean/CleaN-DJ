@@ -1,3 +1,3 @@
-exports.modules = function stop(message) {
+exports.stop = function stop(message) {
     
 }

@@ -1,4 +1,4 @@
-exports.modules = async function clear(message) {
+exports.clear = async function clear(message) {
     var name = message.channel.name;
     await message.channel.delete();
     var channel = await message.guild.createChannel(name, 'general');

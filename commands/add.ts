@@ -4,7 +4,7 @@ let ytsearch = require('youtube-search');
 
 let search, choices;
 
-exports.modules = function add(client, queue, message, opts) {
+exports.add = function add(client, queue, message, opts) {
     if (message.content.includes('http'))
         search = message.content.replace(".add ", "")
     else

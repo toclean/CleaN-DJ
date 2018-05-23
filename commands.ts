@@ -1,14 +1,14 @@
-let add = require('./commands/add.ts');
-let anm = require('./commands/anm.ts');
-let clear = require('./commands/clear.ts');
-let cq = require('./commands/cq.ts');
-let help = require('./commands/help.ts');
-let join = require('./commands/join.ts');
-let leave = require('./commands/leave.ts');
-let ping = require('./commands/ping.ts');
-let queue = require('./commands/queue.ts');
-let skip = require('./commands/skip.ts');
-let stop = require('./commands/stop.ts');
+let add = require('./commands/add.ts').add;
+let anm = require('./commands/anm.ts').anm;
+let clear = require('./commands/clear.ts').clear;
+let cq = require('./commands/cq.ts').cq;
+let help = require('./commands/help.ts').help;
+let join = require('./commands/join.ts').join;
+let leave = require('./commands/leave.ts').leave;
+let ping = require('./commands/ping.ts').ping;
+let queue = require('./commands/queue.ts').queue;
+let skip = require('./commands/skip.ts').skip;
+let stop = require('./commands/stop.ts').stop;
 
 var yt = require('ytdl-core');
 
@@ -216,4 +216,4 @@ let commands = [{
 	}
 ]
 
-exports.modules = { commands };
+exports.commands = commands;
