@@ -1,19 +1,18 @@
-let ping = require('./commands/ping.js').ping;
-let help = require('./commands/help.js').help;
-let add = require('./commands/add.js').add;
-let play = require('./commands/play.js').play;
-let join = require('./commands/join.js').join;
-let skip = require('./commands/skip.js').skip;
-let clear = require('./commands/clear.js').clear;
-let stop = require('./commands/stop.js').stop;
-let leave = require('./commands/leave.js').leave;
-let cq = require('./commands/cq.js').cq;
-let queue = require('./commands/queue.js').queue;
-let anm = require('./commands/amn.js');
+let add = require('./commands/add.ts');
+let anm = require('./commands/amn.ts');
+let clear = require('./commands/clear.ts');
+let cq = require('./commands/cq.ts');
+let help = require('./commands/help.ts');
+let join = require('./commands/join.ts');
+let leave = require('./commands/leave.ts');
+let ping = require('./commands/ping.ts');
+let queue = require('./commands/queue.ts');
+let skip = require('./commands/skip.ts');
+let stop = require('./commands/stop.ts');
 
-let yt = require('ytdl-core');
+var yt = require('ytdl-core');
 
-let embedMaker = require('./tools/embedMaker.js').embedMaker;
+let embedMaker = require('./tools/embedMaker.ts').embedMaker;
 
 const config = require('./config.json');
 
@@ -212,9 +211,9 @@ let commands = [{
 		description: "Sends a message to all users in the server (online/offline)",
 		arguments: [],
 		execute: function (message) {
-			anm.anm(message);
+			anm(message);
 		}
 	}
 ]
 
-exports.commands = commands;
+exports.modules = { commands };

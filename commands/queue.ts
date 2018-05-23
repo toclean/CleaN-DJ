@@ -1,6 +1,10 @@
+<<<<<<< HEAD:commands/queue.js
 let embedMaker = require('../tools/embedMaker').embedMaker;
+=======
+var embedMaker = require('../tools/embedMaker.ts').embedMaker;
+>>>>>>> Converted code from javascript to typescript:commands/queue.ts
 
-exports.queue = function queue(client, queue, message) {
+exports.modules = function queue(client, queue, message) {
     if (queue.songs.length < 1) return message.channel.send('There are no items in the queue!');
 
     let info = [];

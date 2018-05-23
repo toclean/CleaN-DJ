@@ -1,4 +1,4 @@
-exports.leave = function leave(voiceConnection, voiceChannel, queue, message) {
+exports.modules = function leave(voiceConnection, voiceChannel, queue, message) {
     if (voiceConnection) {
         queue.playing = false;
         voiceConnection.disconnect();

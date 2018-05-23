@@ -1,3 +1,4 @@
+<<<<<<< HEAD:commands/clear.js
 exports.clear = async function clear(message) {
     let perm = message.channel.permissionsFor(message.member);
     let canManageChannels = perm.has('MANAGE_MESSAGES');
@@ -18,4 +19,12 @@ exports.clear = async function clear(message) {
         await channel.delete();
         await guild.createChannel(channel.name, 'text');
     });
+=======
+exports.modules = async function clear(message) {
+    var name = message.channel.name;
+    await message.channel.delete();
+    var channel = await message.guild.createChannel(name, 'general');
+    //var category = await message.guild.channels.find(channel => channel.name.toLowerCase() == 'text channels').calculatedPosition;
+    //await message.guild.setChannelPosition(channel, category);
+>>>>>>> Converted code from javascript to typescript:commands/clear.ts
 }
